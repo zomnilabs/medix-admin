@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import Root from './containers/Root';
+import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import App from './App';
 import './index.css';
 import './flexboxgrid.css';
 
@@ -9,7 +12,10 @@ import './flexboxgrid.css';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
-  <App />,
+  <Root store={store} history={history} />,
   document.getElementById('root')
 );
