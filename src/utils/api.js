@@ -2,6 +2,8 @@ import {
     getAuthToken
 } from './token.js';
 
+const API_URL = 'http://api.medix.dev/v1/';
+
 const fetchOpts = (method, body = null) => {
     return Object.assign({}, {
         method,
@@ -16,10 +18,10 @@ const fetchOpts = (method, body = null) => {
 };
 
 const API = {
-    get: (url) => fetch(url, fetchOpts('GET')),
-    post: (url, data) => fetch(url, fetchOpts('POST', data)),
-    put: (url, data)  => fetch(url, fetchOpts('PUT', data)),
-    delete: (url) => fetch(url, fetchOpts('DELETE'))
+    get: (url) => fetch(`${API_URL}${url}`, fetchOpts('GET')),
+    post: (url, data) => fetch(`${API_URL}${url}`, fetchOpts('POST', data)),
+    put: (url, data)  => fetch(`${API_URL}${url}`, fetchOpts('PUT', data)),
+    delete: (url) => fetch(`${API_URL}${url}`, fetchOpts('DELETE'))
 };
 
 export default API;

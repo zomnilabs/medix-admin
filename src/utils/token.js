@@ -1,6 +1,6 @@
 export const getAuthToken = () => {
     let token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    return token ? JSON.parse(token) : null;
+    return token ? token : null;
 };
 
 export const setAuthToken = (token, isRemeber) => {
