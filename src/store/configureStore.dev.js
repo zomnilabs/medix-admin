@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 import { reducer as formReducer } from 'redux-form';
-import { routerMiddleware } from 'react-router-redux';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -13,10 +14,10 @@ const configureStore = preloadedState => {
             ...rootReducer,
             ...preloadedState,
             form: formReducer,
-            routing: routerMiddleware
+            routing: routerReducer
         }),
         composeEnhancers(
-            applyMiddleware(thunk, createLogger())
+            applyMiddleware(thunk, createLogger(), routerMiddleware(browserHistory))
         )
     );
 

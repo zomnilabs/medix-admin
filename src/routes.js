@@ -5,6 +5,6 @@ import Dashboard from './containers/Dashboard';
 import Login from './containers/Login';
 
 export default <Route path="/" component={App}>
-    <IndexRoute component={Dashboard} />
-    <Route path="/login" component={Login} />
+    <IndexRoute component={Login} />
+    <Route path="/dashboard" component={Dashboard} />
 </Route>

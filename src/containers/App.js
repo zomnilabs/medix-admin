@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-// import { browserHistory } from 'react-router';
-// import Explore from '../components/Explore';
-// import { resetErrorMessage } from '../actions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 
 class App extends Component {
     static propTypes = {
@@ -14,9 +14,9 @@ class App extends Component {
         const { children } = this.props;
 
         return (
-            <div>
+            <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
                 {children}
-            </div>
+            </MuiThemeProvider>
         )
     }
 }

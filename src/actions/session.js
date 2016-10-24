@@ -9,8 +9,6 @@ export const SESSION_POST_SUCCESS = 'SESSION_POST_SUCCESS';
 export const SESSION_POST_FAILED = 'SESSION_POST_FAILED';
 
 export const SESSION_DELETE = 'SESSION_DELETE';
-export const SESSION_DELETE_SUCCESS = 'SESSION_DELETE_SUCCESS';
-export const SESSION_DELETE_FAILED = 'SESSION_DELETE_FAILED';
 
 export const getSession = () => ({
     type: SESSION_GET
@@ -29,8 +27,9 @@ export const postSession = () => ({
     type: SESSION_POST
 });
 
-export const postSessionSuccess = () => ({
-    type: SESSION_POST_SUCCESS
+export const postSessionSuccess = (token) => ({
+    type: SESSION_POST_SUCCESS,
+    token
 });
 
 export const postSessionFailed = () => ({
@@ -41,22 +40,38 @@ export const deleteSession = () => ({
     type: SESSION_DELETE
 });
 
-export const deleteSessionSuccess = () => ({
-    type: SESSION_DELETE_SUCCESS
-});
-
-export const deleteSessionFailed = () => ({
-    type: SESSION_DELETE_FAILED
-});
-
 export const getSessionApi = () => (dispatch) => {
     dispatch(getSession());
 
     API.get('admin/auth').then((res) => {
-        if (res.status === 200) {
-            dispatch(getSessionSuccess(res.data.data));
+        if (res.status !== 200) {
+            dispatch(getSessionFailed());
+            return;
         }
 
-        dispatch(getSessionFailed());
+        res.json().then((json) => {
+            dispatch(getSessionSuccess(json));
+        });
+    });
+};
+
+export const postSessionApi = (credentials) => (dispatch) => {
+    dispatch(postSession());
+
+    credentials['grant_type']       = 'admin';
+    credentials['client_id']        = 'dental';
+    credentials['client_secret']    = 'medix-web-app-client';
+
+    return API.post('admin/auth', credentials).then((res) => {
+
+        if (res.status !== 200) {
+            dispatch(postSessionFailed());
+            return;
+        }
+
+        res.json().then((json) => {
+            dispatch(postSessionSuccess(json.access_token));
+            dispatch(getSessionApi());
+        });
     });
 };
