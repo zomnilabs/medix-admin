@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { gotoLogin } from '../../actions/redirect';
-import { getAccountsApi } from '../../actions/accounts';
+import { getAccountsApi, postAccountApi } from '../../actions/accounts';
 import Toolbar from '../../components/Toolbar';
 import Drawer from '../../components/Drawer';
 import DataGrid from '../../components/DataGrid';
@@ -10,7 +10,6 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 import CreateTenantForm from '../../components/CreateTenantForm';
 
@@ -26,7 +25,8 @@ class Accounts extends Component {
     static propTypes = {
         session: PropTypes.object.isRequired,
         gotoLogin: PropTypes.func.isRequired,
-        getAccountsApi: PropTypes.func.isRequired
+        getAccountsApi: PropTypes.func.isRequired,
+        postAccountApi: PropTypes.func.isRequired
     };
 
     state = {
@@ -47,7 +47,7 @@ class Accounts extends Component {
     handleCloseDialog = () => this.setState({dialog: false});
 
     handleCreateTenant = values => {
-        console.log(values);
+        this.props.postAccountApi(values);
     };
 
     componentDidMount() {
@@ -93,5 +93,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
     getAccountsApi,
-    gotoLogin
+    postAccountApi,
+    gotoLogin,
 })(Accounts);
