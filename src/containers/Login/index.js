@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { getSessionApi, postSessionApi } from '../../actions/session';
 import { gotoDashboard } from '../../actions/redirect';
 import LoginForm from '../../components/LoginForm';
+import BigLogo from '../../components/BigLogo';
+
+import './style.css';
 
 class Login extends Component {
     static propTypes = {
@@ -24,9 +27,17 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
-                Login Page
-                <LoginForm onSubmit={this.handleSubmit} />
+            <div className="row center-xs" id="loginContainer">
+                <div className="col-xs-6">
+
+                    <div className="row center-xs">
+                        <div className="col-xs-6" id="logoContainer">
+                            <BigLogo />
+                        </div>
+                    </div>
+
+                    <LoginForm onSubmit={this.handleSubmit} />
+                </div>
             </div>
         )
     }
