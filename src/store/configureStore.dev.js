@@ -5,7 +5,6 @@ import rootReducer from '../reducers';
 import { reducer as formReducer } from 'redux-form';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { browserHistory } from 'react-router';
-
 import { autoRehydrate } from 'redux-persist';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
