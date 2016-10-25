@@ -5,7 +5,7 @@ import { gotoLogin } from '../../actions/redirect';
 import Toolbar from '../../components/Toolbar';
 import Drawer from '../../components/Drawer';
 
-class Dashboard extends Component {
+class Accounts extends Component {
     static propTypes = {
         session: PropTypes.object.isRequired,
         getSessionApi: PropTypes.func.isRequired,
@@ -34,7 +34,7 @@ class Dashboard extends Component {
                 <Drawer open={this.state.drawer} onDrawerToggle={this.handleDrawerToggle} />
                 <Toolbar onDrawerToggle={this.handleDrawerToggle} />
 
-                CONTENTS COMING SOON
+                Accounts
             </div>
         )
     }
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     getSessionApi,
     gotoLogin
-})(Dashboard);
+})(Accounts);
