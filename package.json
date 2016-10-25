@@ -20,6 +20,7 @@
     "redux-logger": "^2.7.0",
     "redux-persist": "^4.0.0-alpha6",
     "redux-persist-immutable": "^4.0.1",
+    "redux-persist-transform-immutable": "^4.1.0",
     "redux-thunk": "^2.1.0",
     "validator": "^6.1.0",
     "whatwg-fetch": "^1.0.0"
