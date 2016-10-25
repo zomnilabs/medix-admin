@@ -127,7 +127,6 @@ class CreateTenantForm extends Component {
                     type="submit"
                     label="Save"
                     primary={true}
-                    keyboardFocused={true}
                     onTouchTap={this.handleCloseDialog}
                 />
             </form>
