@@ -34,7 +34,7 @@ class DrawerUI extends Component {
 }
 
 DrawerUI.contextTypes = {
-    router: React.PropTypes.func.isRequired
+    router: React.PropTypes.object.isRequired
 };
 
 export default DrawerUI;

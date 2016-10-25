@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getSessionApi } from '../../actions/session';
 import { gotoLogin } from '../../actions/redirect';
+import { getAccountsApi } from '../../actions/accounts';
 import Toolbar from '../../components/Toolbar';
 import Drawer from '../../components/Drawer';
+import DataGrid from '../../components/DataGrid';
+import './style.css';
 
 class Accounts extends Component {
     static propTypes = {
         session: PropTypes.object.isRequired,
-        getSessionApi: PropTypes.func.isRequired,
-        gotoLogin: PropTypes.func.isRequired
+        gotoLogin: PropTypes.func.isRequired,
+        getAccountsApi: PropTypes.func.isRequired
     };
 
     state = {
@@ -25,7 +27,9 @@ class Accounts extends Component {
     handleDrawerToggle = () => this.setState({drawer: !this.state.drawer});
 
     componentDidMount() {
-        this.checkSession(this.props)
+        this.checkSession(this.props);
+
+        this.props.getAccountsApi();
     }
 
     render() {
@@ -34,17 +38,22 @@ class Accounts extends Component {
                 <Drawer open={this.state.drawer} onDrawerToggle={this.handleDrawerToggle} />
                 <Toolbar onDrawerToggle={this.handleDrawerToggle} />
 
-                Accounts
+                <div className="row center-xs" id="contentWrapper">
+                    <div className="col-xs-11">
+                        <DataGrid accounts={this.props.accounts} />
+                    </div>
+                </div>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    session: state.session
+    session: state.session,
+    accounts: state.accounts
 });
 
 export default connect(mapStateToProps, {
-    getSessionApi,
+    getAccountsApi,
     gotoLogin
 })(Accounts);
