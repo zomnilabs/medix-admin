@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getSessionApi, postSessionApi } from '../../actions/session';
+import { getSessionApi, postSessionApi, checkSession } from '../../actions/session';
 import { gotoDashboard } from '../../actions/redirect';
 import LoginForm from '../../components/LoginForm';
 import BigLogo from '../../components/BigLogo';
@@ -19,10 +19,18 @@ class Login extends Component {
         this.props.postSessionApi(values);
     };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.session.get('isAuth')) {
+    checkSession = (props) => {
+        if (props.session.get('isAuth')) {
             this.props.gotoDashboard();
         }
+    };
+
+    componentDidMount() {
+        this.checkSession(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.checkSession(nextProps);
     }
 
     render() {

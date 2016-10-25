@@ -6,6 +6,8 @@ import { reducer as formReducer } from 'redux-form';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
 import { browserHistory } from 'react-router';
 
+import { autoRehydrate } from 'redux-persist';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const configureStore = preloadedState => {
@@ -18,7 +20,8 @@ const configureStore = preloadedState => {
         }),
         composeEnhancers(
             applyMiddleware(thunk, createLogger(), routerMiddleware(browserHistory))
-        )
+        ),
+        autoRehydrate()
     );
 
     if (module.hot) {

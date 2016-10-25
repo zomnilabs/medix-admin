@@ -1,21 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { getSessionApi } from '../../actions/session';
+import { gotoLogin } from '../../actions/redirect';
+import Toolbar from '../../components/Toolbar';
 
 class Dashboard extends Component {
     static propTypes = {
         session: PropTypes.object.isRequired,
-        getSessionApi: PropTypes.func.isRequired
+        getSessionApi: PropTypes.func.isRequired,
+        gotoLogin: PropTypes.func.isRequired
+    };
+
+    checkSession = (props) => {
+        if (! props.session.get('isAuth')) {
+            this.props.gotoLogin();
+        }
     };
 
     componentDidMount() {
-        this.props.getSessionApi();
+        this.checkSession(this.props)
     }
 
     render() {
         return (
             <div>
-                Hello
+                <Toolbar/>
             </div>
         )
     }
@@ -26,5 +35,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-    getSessionApi
+    getSessionApi,
+    gotoLogin
 })(Dashboard);
