@@ -16,7 +16,7 @@ class DataGridUI extends Component {
 
         return (
             <Table
-                height={'300px'}
+                height={'500px'}
                 fixedHeader={true}
                 fixedFooter={true}
                 selectable={true}
