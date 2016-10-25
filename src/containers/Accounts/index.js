@@ -5,7 +5,22 @@ import { getAccountsApi } from '../../actions/accounts';
 import Toolbar from '../../components/Toolbar';
 import Drawer from '../../components/Drawer';
 import DataGrid from '../../components/DataGrid';
+
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+
+import CreateTenantForm from '../../components/CreateTenantForm';
+
 import './style.css';
+
+const style = {
+    position: 'fixed',
+    bottom: '10px',
+    right: '20px',
+};
 
 class Accounts extends Component {
     static propTypes = {
@@ -15,7 +30,8 @@ class Accounts extends Component {
     };
 
     state = {
-        drawer: false
+        drawer: false,
+        dialog: false
     };
 
     checkSession = (props) => {
@@ -25,6 +41,14 @@ class Accounts extends Component {
     };
 
     handleDrawerToggle = () => this.setState({drawer: !this.state.drawer});
+
+    handleOpenDialog = () => this.setState({dialog: true});
+
+    handleCloseDialog = () => this.setState({dialog: false});
+
+    handleCreateTenant = values => {
+        console.log(values);
+    };
 
     componentDidMount() {
         this.checkSession(this.props);
@@ -43,6 +67,20 @@ class Accounts extends Component {
                         <DataGrid accounts={this.props.accounts} />
                     </div>
                 </div>
+
+                <Dialog
+                    title="Create New Account"
+                    modal={false}
+                    open={this.state.dialog}
+                    onRequestClose={this.handleCloseDialog}
+                    autoDetectWindowHeight={false}
+                >
+                    <CreateTenantForm onSubmit={this.handleCreateTenant} />
+                </Dialog>
+
+                <FloatingActionButton style={style} onTouchTap={this.handleOpenDialog}>
+                    <ContentAdd />
+                </FloatingActionButton>
             </div>
         )
     }

@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 
 const TextInput = (props) => {
-    const { hintText, id, name, label, type, input } = props;
+    const { hintText, id, name, label, type, input, meta: { touched, error } } = props;
 
     let className = '';
     if (props.className) {
@@ -12,6 +12,7 @@ const TextInput = (props) => {
     return (
         <TextField
             {...input}
+            errorText={touched && error}
             hintText={hintText}
             label={label}
             id={id}
