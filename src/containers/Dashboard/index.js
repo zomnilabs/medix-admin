@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getSessionApi } from '../actions/session';
+import { getSessionApi } from '../../actions/session';
 
 class Dashboard extends Component {
     static propTypes = {
@@ -13,11 +13,11 @@ class Dashboard extends Component {
     }
 
     render() {
-       return (
-           <div>
-               Hello
-           </div>
-       )
+        return (
+            <div>
+                Hello
+            </div>
+        )
     }
 }
 

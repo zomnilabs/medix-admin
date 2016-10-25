@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getSessionApi, postSessionApi } from '../actions/session';
-import { gotoDashboard } from '../actions/redirect';
-import LoginForm from '../components/LoginForm';
+import { getSessionApi, postSessionApi } from '../../actions/session';
+import { gotoDashboard } from '../../actions/redirect';
+import LoginForm from '../../components/LoginForm';
 
 class Login extends Component {
     static propTypes = {
